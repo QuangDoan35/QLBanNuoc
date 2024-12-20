@@ -13,11 +13,11 @@ namespace QLBanNuoc
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            DangNhap dangNhap = new DangNhap();
+            //DangNhap dangNhap = new DangNhap();
             //dangNhap.Show();
 
-            TrangChu trangChu = new TrangChu();
-            trangChu.Show();
+            Form_Layout mainForm = new Form_Layout();
+            mainForm.Show();
 
             Application.Run();
         }

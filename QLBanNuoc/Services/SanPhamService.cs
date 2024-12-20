@@ -35,14 +35,14 @@ namespace QLBanNuoc.Services
 
             while (reader.Read())
             {
-                string maSP = reader.GetString(0);
-                string maDM = reader.GetString(1);
-                string tenSP = reader.GetString(2);
+                string maSP = reader.GetString(0).Trim();
+                string maDM = reader.GetString(1).Trim();
+                string tenSP = reader.GetString(2).Trim();
                 int soLuongTon = reader.GetInt32(3);
                 int soLuongDaBan = reader.GetInt32(4);
                 decimal gia = reader.GetDecimal(5);
-                string moTa = reader.GetString(6);
-                string anhSanPham = reader.GetString(7);
+                string moTa = reader.GetString(6).Trim();
+                string anhSanPham = reader.GetString(7).Trim();
 
                 SanPhamModels sanPham = new SanPhamModels(maSP, maDM, tenSP, soLuongTon, soLuongDaBan, gia, moTa, anhSanPham);
 
@@ -70,14 +70,14 @@ namespace QLBanNuoc.Services
 
             while (reader.Read())
             {
-                string maSP = reader.GetString(0);
-                string maDM = reader.GetString(1);
-                string tenSP = reader.GetString(2);
+                string maSP = reader.GetString(0).Trim();
+                string maDM = reader.GetString(1).Trim();
+                string tenSP = reader.GetString(2).Trim();
                 int soLuongTon = reader.GetInt32(3);
                 int soLuongDaBan = reader.GetInt32(4);
                 decimal gia = reader.GetDecimal(5);
-                string moTa = reader.GetString(6);
-                string anhSanPham = reader.GetString(7);
+                string moTa = reader.GetString(6).Trim();
+                string anhSanPham = reader.GetString(7).Trim();
 
                 SanPhamModels sanPham = new SanPhamModels(maSP, maDM, tenSP, soLuongTon, soLuongDaBan, gia, moTa, anhSanPham);
 

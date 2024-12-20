@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using QLBanNuoc.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,9 +20,9 @@ namespace QLBanNuoc.Services
         }
 
         //===================== Kiểm tra thông tin và trả về mã admin =================================
-        public string kiemTraDangNhap(string taiKhoan, string matKhau)
+        public AdminModels kiemTraDangNhap(string taiKhoan, string matKhau)
         {
-            string maAdmin = "";
+            AdminModels adminModels = null;
 
             if (_sqlConnection == null)
                 _sqlConnection = _databaseService.Connection();
@@ -35,35 +36,15 @@ namespace QLBanNuoc.Services
 
             if (reader.Read())
             {
-                maAdmin = reader.GetString(0);
+                string maAdmin = reader.GetString(0);
+                string tenAdmin = reader.GetString(1);
+
+                adminModels = new AdminModels(maAdmin, tenAdmin);
             }
 
             _sqlConnection.Close();
 
-            return maAdmin;
+            return adminModels;
         }
-
-        //==================== Lấy thông tin admin =============================
-        //public string getThongTinAdmin (string maAdmin)
-        //{
-        //    string tenAdmin = "";
-
-        //    SqlConnection sqlConnection = _databaseService.Connection();
-
-        //    SqlCommand sqlCommand = new SqlCommand("KiemTraDangNhap", sqlConnection);
-        //    sqlCommand.CommandType = CommandType.StoredProcedure;
-        //    sqlCommand.Parameters.AddWithValue("@TaiKhoan", maAdmin);
-
-        //    SqlDataReader reader = sqlCommand.ExecuteReader();
-
-        //    if (reader.Read())
-        //    {
-        //        maAdmin = reader.GetString(0);
-        //    }
-
-        //    sqlConnection.Close();
-
-        //    return tenAdmin;
-        //}
     }
 }

@@ -8,8 +8,8 @@ namespace QLBanNuoc.Models
 {
     public class AdminModels
     {
-        string MaAdmin {  get; set; }
-        string HoTen {  get; set; }
+        public string MaAdmin {  get; set; }
+        public string HoTen {  get; set; }
 
         public AdminModels (string maAdmin, string hoTen)
         {

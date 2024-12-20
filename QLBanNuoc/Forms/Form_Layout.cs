@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,130 +13,150 @@ namespace QLBanNuoc.Forms
 {
     public partial class Form_Layout : Form
     {
+        public string maAdmin { get; set; }
+
         public Form_Layout()
         {
             InitializeComponent();
-            // Không cho thay đổi kích thước của form
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-        }
-        public void Form_Layout_Load(object sender, EventArgs e)
-        {
-            setStyleHoverMenu();
-            AnChucNang();
         }
 
-        //======================= Ẩn hết các nút chức năng khi mới vào form =====================
-        public void AnChucNang()
+        public Form_Layout(string maAdmin)
         {
-            panel_ButtonChinhSua.Visible = false;
-            panel_ButtonXoa.Visible = false;
-            panel_ButtonLuu.Visible = false;
-            panel_ButtonHuy.Visible = false;
+            this.maAdmin = maAdmin;
         }
 
-        //================== Hiệu ứng hover trong menu ===================================
-        public void setStyleHoverMenu()
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            panel_TrangChuLink.MouseEnter += mouseEnter;
-            panel_DanhMucLink.MouseEnter += mouseEnter;
-            panel_SanPhamLink.MouseEnter += mouseEnter;
-            panel_KhachHangLink.MouseEnter += mouseEnter;
-            panel_HoaDonLink.MouseEnter += mouseEnter;
-            panel_CTHDLink.MouseEnter += mouseEnter;
-            panel_DangXuatLink.MouseEnter += mouseEnter;
+            lbl_AdminName.Text = maAdmin;
 
-            panel_TrangChuLink.MouseLeave += mouseLeave;
-            panel_DanhMucLink.MouseLeave += mouseLeave;
-            panel_SanPhamLink.MouseLeave += mouseLeave;
-            panel_KhachHangLink.MouseLeave += mouseLeave;
-            panel_HoaDonLink.MouseLeave += mouseLeave;
-            panel_CTHDLink.MouseLeave += mouseLeave;
-            panel_DangXuatLink.MouseLeave += mouseLeave;
+            //Mặc định hiển thị trang chủ đầu tiền khi vừa mới vào ứng dụng
+            loadForm(new Form_TrangChu());
+            SetButtonStyle(btn_TrangChu, Color.DodgerBlue, Color.White);
         }
 
-        public void mouseEnter(object sender, EventArgs e)
+        //=============================== sử lý sự kiện bấm chọn vào các mục trong menu ========================
+        public void loadForm(object Form)
         {
-            Panel panel = sender as Panel;
-            if (panel != null)
+            if (this.panel_Main.Controls.Count > 0)
             {
-                panel.BackColor = System.Drawing.Color.WhiteSmoke;
+                this.panel_Main.Controls.RemoveAt(0);
+            }
+
+            Form form = Form as Form;
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            this.panel_Main.Controls.Add(form);
+            this.panel_Main.Tag = form;
+            form.Show();
+        }
+
+        //Chuyển sang form trang chủ
+        private void btn_TrangChu_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_TrangChu());
+
+            resetButton();
+
+            SetButtonStyle(btn_TrangChu, Color.DodgerBlue, Color.White);
+        }
+
+        //Chuyển sang form danh mục
+        private void btn_DanhMuc_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_DanhMuc());
+
+            resetButton();
+
+            SetButtonStyle(btn_DanhMuc, Color.DodgerBlue, Color.White);
+        }
+
+        //Chuyển sang form sản phẩm
+        private void btn_SanPham_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_SanPham());
+
+            resetButton();
+
+            SetButtonStyle(btn_SanPham, Color.DodgerBlue, Color.White);
+        }
+
+        //Chuyển qua form khách hàng
+        private void btn_khachHang_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_KhachHang());
+
+            resetButton();
+
+            SetButtonStyle(btn_khachHang, Color.DodgerBlue, Color.White);
+        }
+
+        //Chuyển qua form hóa đơn
+        private void btn_HoaDon_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_HoaDon());
+
+            resetButton();
+
+            SetButtonStyle(btn_HoaDon, Color.DodgerBlue, Color.White);
+        }
+
+        //Chuyển qua form chi tiết hóa đơn
+        private void btn_ChiTietHoaDon_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_ChiTietHoaDon());
+
+            resetButton();
+
+            SetButtonStyle(btn_ChiTietHoaDon, Color.DodgerBlue, Color.White);
+        }
+
+        //Đăng xuất
+        private void btn_DangXuat_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Form_DangNhap dangNhap = new Form_DangNhap();
+                dangNhap.Show();
+
+                this.Hide();
             }
         }
 
-        public void mouseLeave(object sender, EventArgs e)
+        //======================================================================================================
+
+        //=========================== Đặt style cho nút khi được kích hoạt và đặt lại màu nền cho các nút bấm menu về lại ban đầu ======================================
+        private void SetButtonStyle(Guna2Button btn, Color fillColor, Color foreColor)
         {
-            Panel panel = sender as Panel;
-            if (panel != null)
-            {
-                panel.BackColor = System.Drawing.Color.Transparent;
-            }
+            btn.FillColor = fillColor;
+            btn.ForeColor = foreColor;
         }
 
-        private void Form_Layout_FormClosing(object sender, FormClosingEventArgs e)
+        public void resetButton()
+        {
+            btn_TrangChu.FillColor = Color.WhiteSmoke;
+            btn_DanhMuc.FillColor = Color.WhiteSmoke;
+            btn_SanPham.FillColor = Color.WhiteSmoke;
+            btn_khachHang.FillColor = Color.WhiteSmoke;
+            btn_HoaDon.FillColor = Color.WhiteSmoke;
+            btn_ChiTietHoaDon.FillColor = Color.WhiteSmoke;
+
+            btn_TrangChu.ForeColor = Color.DimGray;
+            btn_DanhMuc.ForeColor = Color.DimGray;
+            btn_SanPham.ForeColor = Color.DimGray;
+            btn_khachHang.ForeColor = Color.DimGray;
+            btn_HoaDon.ForeColor = Color.DimGray;
+            btn_ChiTietHoaDon.ForeColor = Color.DimGray;
+        }
+
+
+        //=============================== Đóng form ============================================================
+        private void FormLayout_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
 
-
-        //==================== Chọn chức năng trên menu ===========================
-
-        // Form trang chủ
-        private void TrangChuLink_Click(object sender, EventArgs e)
-        {
-            TrangChu trangChu = new TrangChu();
-            trangChu.Show();
-            this.Hide();
-        }
-
-        //Form danh mục
-        private void DanhMucLink_Click(object sender, EventArgs e)
-        {
-            DanhMuc danhMuc = new DanhMuc();
-            danhMuc.Show();
-            this.Hide();
-        }
-
-        //Form sản phẩm
-        private void SanPhamLink_Click(object sender, EventArgs e)
-        {
-            SanPham sanPham = new SanPham();
-            sanPham.Show();
-            this.Hide();
-        }
-
-        // Đăng xuất và quay trở lại form đăng nhập
-        private void DangXuatLink_Click(object sender, EventArgs e)
-        {
-            DangNhap dangNhap = new DangNhap();
-            dangNhap.Show();
-            this.Hide();
-        }
-
-        private void txb_SearchBox_Click(object sender, EventArgs e)
-        {
-            TimKiem timKiem = new TimKiem();
-            timKiem.Show();
-
-            this.Hide();
-        }
-
-        // =================== Nút thêm mới ============================
-        private void btn_ThemMoi_Click(object sender, EventArgs e)
-        {
-            // Khi bấm vào nút thêm mới thì sẽ hiển thị ra nút lưu và hủy
-            panel_ButtonLuu.Visible = true;
-            panel_ButtonHuy.Visible = true;
-            // Enable khung nhập dữ liệu
-            panel17.Enabled = true;
-
-            // Ẩn các nút không cần thiết
-            panel_ButtonChinhSua.Visible = false;
-            panel_ButtonXoa.Visible = false;
-        }
-
-        private void btn_Luu_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

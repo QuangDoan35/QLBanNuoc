@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using QLBanNuoc.Models;
 using QLBanNuoc.Services;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ using System.Windows.Forms;
 
 namespace QLBanNuoc.Forms
 {
-    public partial class DangNhap : Form
+    public partial class Form_DangNhap : Form
     {
-        public DangNhap()
+        public Form_DangNhap()
         {
             InitializeComponent();
             // Không cho thay đổi kích thước của form
@@ -57,9 +58,9 @@ namespace QLBanNuoc.Forms
             }
             else
             {
-                string maAdmin = adminService.kiemTraDangNhap(TaiKhoan, MatKhau);
+                AdminModels adminModels = adminService.kiemTraDangNhap(TaiKhoan, MatKhau);
 
-                if (string.IsNullOrEmpty(maAdmin) || maAdmin.Equals(""))
+                if (adminModels == null)
                 {
                     lbl_ErrorLogin.Text = "Tài khoản hoặc mật khẩu không chính xác!";
                 }
@@ -67,8 +68,9 @@ namespace QLBanNuoc.Forms
                 {
                     MessageBox.Show("Đăng nhập thành công", "Thông báo");
 
-                    TrangChu trangChu = new TrangChu();
-                    trangChu.Show();
+                    Form_Layout mainForm = new Form_Layout();
+                    mainForm.maAdmin = adminModels.HoTen;
+                    mainForm.Show();
 
                     this.Close();
                 }
@@ -78,7 +80,12 @@ namespace QLBanNuoc.Forms
         //==================== Thoát =====================================
         private void btn_Thoat_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         //================== Xóa nội dung thông báo lỗi đăng nhập ================================

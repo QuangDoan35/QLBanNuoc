@@ -118,28 +118,49 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="icon-serach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Icons\icon-serach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="login-background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Images\login-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Icons\icon-home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="product-image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Images\product-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="login-background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Images\login-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon-search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Icons\icon-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="admin-avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Images\admin-avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-serach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-serach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Images\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="admin-avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Images\admin-avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="home-banner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Images\home-banner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="product-image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Images\product-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon-add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\Icons\icon-add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-home1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\Icons\icon-close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

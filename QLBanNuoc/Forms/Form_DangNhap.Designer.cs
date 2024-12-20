@@ -1,6 +1,6 @@
 ﻿namespace QLBanNuoc.Forms
 {
-    partial class DangNhap
+    partial class Form_DangNhap
     {
         /// <summary>
         /// Required designer variable.
