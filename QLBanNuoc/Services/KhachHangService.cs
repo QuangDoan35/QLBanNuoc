@@ -101,5 +101,35 @@ namespace QLBanNuoc.Services
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
         }
+
+
+        //====================== Tìm kiếm khach hang ==============================================
+        public List<KhachHangModels> TimKiem(string searchString)
+        {
+            // Lấy danh sách sản phẩm
+            List<KhachHangModels> khachHangs = GetDanhSachKhachHang();
+            List<KhachHangModels> khachHangsTimKiem = new List<KhachHangModels>();
+
+            // Chuẩn hóa searchString để so sánh không phân biệt hoa thường
+            string searchStringLower = searchString.ToLower();
+
+            // Duyệt qua từng sản phẩm
+            foreach (KhachHangModels khachHang in khachHangs)
+            {
+                string maSPLower = khachHang.MaKH.ToLower();
+                string tenSPLower = khachHang.HoTen.ToLower();
+
+                if (maSPLower.Equals(searchStringLower))
+                {
+                    khachHangsTimKiem.Add(khachHang);
+                }
+                else if (tenSPLower.Contains(searchStringLower))
+                {
+                    khachHangsTimKiem.Add(khachHang);
+                }
+            }
+
+            return khachHangsTimKiem;
+        }
     }
 }

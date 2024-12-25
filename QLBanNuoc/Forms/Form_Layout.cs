@@ -135,12 +135,12 @@ namespace QLBanNuoc.Forms
 
         public void resetButton()
         {
-            btn_TrangChu.FillColor = Color.WhiteSmoke;
-            btn_DanhMuc.FillColor = Color.WhiteSmoke;
-            btn_SanPham.FillColor = Color.WhiteSmoke;
-            btn_khachHang.FillColor = Color.WhiteSmoke;
-            btn_HoaDon.FillColor = Color.WhiteSmoke;
-            btn_ChiTietHoaDon.FillColor = Color.WhiteSmoke;
+            btn_TrangChu.FillColor = Color.FromArgb(227, 242, 253);
+            btn_DanhMuc.FillColor = Color.FromArgb(227, 242, 253);
+            btn_SanPham.FillColor = Color.FromArgb(227, 242, 253);
+            btn_khachHang.FillColor = Color.FromArgb(227, 242, 253);
+            btn_HoaDon.FillColor = Color.FromArgb(227, 242, 253);
+            btn_ChiTietHoaDon.FillColor = Color.FromArgb(227, 242, 253);
 
             btn_TrangChu.ForeColor = Color.DimGray;
             btn_DanhMuc.ForeColor = Color.DimGray;
@@ -157,6 +157,12 @@ namespace QLBanNuoc.Forms
             Application.Exit();
         }
 
-        
+        //================================= Chuyển qua form tìm kiếm ==================================================
+        private void txb_TimKiem_Click(object sender, EventArgs e)
+        {
+            loadForm(new Form_TimKiem(this));
+
+            resetButton();
+        }
     }
 }

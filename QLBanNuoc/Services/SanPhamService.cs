@@ -26,7 +26,7 @@ namespace QLBanNuoc.Services
 
             SqlConnection sqlConnection = _databaseService.Connection();
 
-            string sqlString = "SELECT TOP 10 * FROM SanPham ORDER BY SoLuongDaBan DESC";
+            string sqlString = "SELECT TOP 14 * FROM SanPham ORDER BY SoLuongDaBan DESC";
 
             SqlCommand sqlCommand = new SqlCommand(sqlString, sqlConnection);
             sqlCommand.CommandType = CommandType.Text;
@@ -142,6 +142,71 @@ namespace QLBanNuoc.Services
 
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
+        }
+
+        //================================= Lấy ra giá bán của sản phẩm có mã được truyền vào ====================
+        public decimal LayGiaBanTheoMaSP(string maSP)
+        {
+            decimal gia = -1;
+
+            // Mở kết nối đến cơ sở dữ liệu
+            SqlConnection sqlConnection = _databaseService.Connection();
+
+            // Câu truy vấn SQL để lấy giá sản phẩm theo mã sản phẩm
+            string sqlString = "Select Gia from SanPham Where MaSP = @maSP";
+
+            SqlCommand sqlCommand = new SqlCommand(sqlString, sqlConnection);
+            sqlCommand.CommandType = CommandType.Text;
+            sqlCommand.Parameters.AddWithValue("@maSP", maSP);
+
+            // Thực thi truy vấn và lấy giá trị trả về
+            object result = sqlCommand.ExecuteScalar();
+
+            // Nếu kết quả không phải null, gán giá trị vào biến gia
+            if (result != null && decimal.TryParse(result.ToString(), out gia))
+            {
+                return gia;
+            }
+
+            sqlConnection.Close();
+
+            // Nếu không tìm thấy giá trị hợp lệ, trả về 0
+            return gia;
+        }
+
+
+        //====================== Tìm kiếm san pham ==============================================
+        public List<SanPhamModels> TimKiem(string searchString)
+        {
+            // Lấy danh sách sản phẩm
+            List<SanPhamModels> sanPhams = GetDanhSachSanPham();
+            List<SanPhamModels> sanPhamsTimKiem = new List<SanPhamModels>();
+
+            // Chuẩn hóa searchString để so sánh không phân biệt hoa thường
+            string searchStringLower = searchString.ToLower();
+
+            // Duyệt qua từng sản phẩm
+            foreach (SanPhamModels sanPham in sanPhams)
+            {
+                string maSPLower = sanPham.MaSP.ToLower();
+                string tenSPLower = sanPham.TenSP.ToLower();
+                string moTaSPLower = sanPham.MoTa.ToLower();
+
+                if (maSPLower.Equals(searchStringLower))
+                {
+                    sanPhamsTimKiem.Add(sanPham);
+                }
+                else if (tenSPLower.Contains(searchStringLower))
+                {
+                    sanPhamsTimKiem.Add(sanPham);
+                }
+                else if (moTaSPLower.Contains(searchStringLower))
+                {
+                    sanPhamsTimKiem.Add(sanPham);
+                }
+            }
+
+            return sanPhamsTimKiem;
         }
     }
 }

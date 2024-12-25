@@ -96,5 +96,38 @@ namespace QLBanNuoc.Services
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
         }
+
+        //====================== Tìm kiếm danh mục ==============================================
+        public List<DanhMucModels> TimKiem(string searchString)
+        {
+            List<DanhMucModels> danhMucs = new List<DanhMucModels>();
+
+            using (SqlConnection sqlConnection = _databaseService.Connection())
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(
+                    "SELECT * FROM DanhMuc WHERE MaDM = @maDM OR TenDM LIKE @tenDM", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.Text;
+                    sqlCommand.Parameters.AddWithValue("@maDM", searchString);
+                    sqlCommand.Parameters.AddWithValue("@tenDM", "%" + searchString + "%");
+
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string maDM = reader.GetString(0);
+                            string tenDM = reader.GetString(1);
+                            string moTa = reader.GetString(2);
+                            string anhDM = reader.GetString(3);
+
+                            DanhMucModels danhMuc = new DanhMucModels(maDM, tenDM, moTa, anhDM);
+                            danhMucs.Add(danhMuc);
+                        }
+                    }
+                }
+            }
+
+            return danhMucs;
+        }
     }
 }

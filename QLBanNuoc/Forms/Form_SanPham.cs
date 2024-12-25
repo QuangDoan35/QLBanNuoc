@@ -19,11 +19,19 @@ namespace QLBanNuoc.Forms
         int trangThai; //trạng thái của nút lưu: 1 - thêm mới, 2 - chỉnh sửa
         string currentAnhSP;
 
+        public string maSPTimKiem { get; set; }
+
         public Form_SanPham()
         {
             InitializeComponent();
 
+        }
+
+        private void Form_SanPham_Load(object sender, EventArgs e)
+        {
             hienThiDanhSachSanPham();
+
+            chonSanPhamTimKiem();
         }
 
         //========================= Xóa trắng thông tin trong form và vô hiệu hóa form =====================
@@ -105,7 +113,7 @@ namespace QLBanNuoc.Forms
             ptb_AnhSP.ImageLocation = anhSP;
 
             currentAnhSP = anhSP;
-            
+
             resetButton();
             panel_FormFields.Enabled = false;
 
@@ -177,7 +185,7 @@ namespace QLBanNuoc.Forms
         //Lưu thêm mới danh mục
         public void luuThemMoi(SanPhamModels sanPham)
         {
-            try 
+            try
             {
                 //Lưu thông tin vào database
                 sanPhamService.ThemSanPham(sanPham);
@@ -349,6 +357,27 @@ namespace QLBanNuoc.Forms
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 ptb_AnhSP.ImageLocation = ofd.FileName;
+            }
+        }
+
+        //========================= Chọn vào hàng được tìm kiếm ======================================
+        private void chonSanPhamTimKiem()
+        {
+            foreach (DataGridViewRow row in dgv_DSSanPham.Rows)
+            {
+                if (row.Cells[1].Value != null && row.Cells[1].Value.ToString() == maSPTimKiem)
+                {
+                    // Chọn dòng
+                    row.Selected = true;
+
+                    // Đặt con trỏ vào ô của dòng
+                    dgv_DSSanPham.CurrentCell = row.Cells[1];
+
+                    // Kích hoạt sự kiện CellClick
+                    int rowIndex = row.Index;
+                    dgv_DSSanPham_CellClick(this, new DataGridViewCellEventArgs(1, rowIndex));
+                    break;
+                }
             }
         }
     }

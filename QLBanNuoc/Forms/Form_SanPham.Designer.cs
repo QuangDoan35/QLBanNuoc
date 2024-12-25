@@ -702,6 +702,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form_SanPham";
             Text = "Form_SanPham";
+            Load += Form_SanPham_Load;
             panel1.ResumeLayout(false);
             panel_FormFields.ResumeLayout(false);
             guna2Panel1.ResumeLayout(false);

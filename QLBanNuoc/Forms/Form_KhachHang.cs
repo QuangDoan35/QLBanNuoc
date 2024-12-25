@@ -20,6 +20,8 @@ namespace QLBanNuoc.Forms
         int trangThai; // Trạng thái của nút lưu: 1 - thêm mới, 2 - chỉnh sửa
         string currentAnhKH;
 
+        public string MaKHTimKiem { get; set; }
+
         public Form_KhachHang()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace QLBanNuoc.Forms
         private void Form_KhachHang_Load(object sender, EventArgs e)
         {
             hienThiDanhSachKhachHang();
+
+            chonKhachHangTimKiem();
         }
 
 
@@ -301,6 +305,29 @@ namespace QLBanNuoc.Forms
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 ptb_AnhKH.ImageLocation = ofd.FileName;
+            }
+        }
+
+
+
+        //========================= Chọn vào hàng được tìm kiếm ======================================
+        private void chonKhachHangTimKiem()
+        {
+            foreach (DataGridViewRow row in dgv_DSKhachHang.Rows)
+            {
+                if (row.Cells[1].Value != null && row.Cells[1].Value.ToString() == MaKHTimKiem)
+                {
+                    // Chọn dòng
+                    row.Selected = true;
+
+                    // Đặt con trỏ vào ô của dòng
+                    dgv_DSKhachHang.CurrentCell = row.Cells[1];
+
+                    // Kích hoạt sự kiện CellClick
+                    int rowIndex = row.Index;
+                    dgv_DSKhachHang_CellClick(this, new DataGridViewCellEventArgs(1, rowIndex));
+                    break;
+                }
             }
         }
     }

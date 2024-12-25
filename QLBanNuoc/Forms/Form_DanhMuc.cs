@@ -19,6 +19,8 @@ namespace QLBanNuoc.Forms
         int trangThai; //trạng thái của nút lưu: 1 - thêm mới, 2 - chỉnh sửa
         string currentAnhDM;
 
+        public string maDMTimKiem { get; set; }
+
         public Form_DanhMuc()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace QLBanNuoc.Forms
             danhMucs = danhMucService.GetDanhMuc();
 
             hienThiDanhMuc();
+
+            chonDanhMucTimKiem();
         }
 
         //========================= Hiển thị danh sách danh mục =============================================
@@ -321,6 +325,28 @@ namespace QLBanNuoc.Forms
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 ptb_AnhDM.ImageLocation = ofd.FileName;
+            }
+        }
+
+
+        //========================= Chọn vào hàng được tìm kiếm ======================================
+        private void chonDanhMucTimKiem()
+        {
+            foreach (DataGridViewRow row in dgv_DanhMuc.Rows)
+            {
+                if (row.Cells[1].Value != null && row.Cells[1].Value.ToString() == maDMTimKiem)
+                {
+                    // Chọn dòng
+                    row.Selected = true;
+
+                    // Đặt con trỏ vào ô của dòng
+                    dgv_DanhMuc.CurrentCell = row.Cells[1];
+
+                    // Kích hoạt sự kiện CellClick
+                    int rowIndex = row.Index;
+                    dgv_DanhMuc_CellClick(this, new DataGridViewCellEventArgs(1, rowIndex));
+                    break;
+                }
             }
         }
     }
